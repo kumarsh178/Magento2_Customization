@@ -1,0 +1,28 @@
+type Query
+{
+    CustomGraphql (
+        username: String @doc(description: "Email Address Mobile number"),
+        password: String @doc(description: "password"),
+        fieldtype: String @doc(description: "Field Type"),
+        websiteId: Int=1 @doc(description: "Website Id")
+    ): CustomGraphqlOutput @resolver(class: "Practice\\Usersdata\\Model\\Resolver\\CustomGraphql") @doc(description:"Custom module datapassing") @cache(cacheable: false)
+}
+
+type CustomGraphqlOutput {
+    username: String @doc(description: "Email Address Mobile number")
+    password: String @doc(description: "password")
+    fieldtype: String @doc(description: "Field Type")
+    defaultfields: String @doc(description: "array data")
+}
+
+type Query
+{
+ testcustomer(email: String @doc(description: "Email Address")
+ ): testCustomerOutput @resolver(class: "Practice\\Usersdata\\Model\\Resolver\\TestCustomer") @doc(description: "Custom module datapassing")
+}
+type testCustomerOutput {
+    enitity_id: Int
+    firstname: String
+    lastname: String
+    email: String
+}

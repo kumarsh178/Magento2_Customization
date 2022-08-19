@@ -1,0 +1,40 @@
+type Query
+{
+    CustomGraphql (
+        username: String @doc(description: "Email Address Mobile number"),
+        password: String @doc(description: "password"),
+        fieldtype: String @doc(description: "Field Type"),
+        websiteId: Int=1 @doc(description: "Website Id")
+    ): CustomGraphqlOutput @resolver(class: "Practice\\Usersdata\\Model\\Resolver\\CustomGraphql") @doc(description:"Custom module datapassing") @cache(cacheable: false)
+    testcustomer(email: String @doc(description: "Email Address")
+ ): testCustomerOutput @resolver(class: "Practice\\Usersdata\\Model\\Resolver\\TestCustomer") @doc(description: "Custom module datapassing")
+}
+type testCustomerOutput {
+    enitity_id: Int
+    firstname: String
+    lastname: String
+    email: String
+}
+type CustomGraphqlOutput {
+    username: String @doc(description: "Email Address Mobile number")
+    password: String @doc(description: "password")
+    fieldtype: String @doc(description: "Field Type")
+    defaultfields: String @doc(description: "array data")
+}
+type Mutation {
+    testCreateCustomer(
+        input:testCustomerInput!
+        ): testCreateCustomerOutput @resolver(class: "Practice\\Usersdata\\Model\\Resolver\\TestCreateCustomer") 
+    @doc(description: "create customer fromapi")
+}
+type testCreateCustomerOutput {
+    success_message: String @doc(description: "Success Message")
+    error_message: String @doc(description: "Error Message")
+}
+input testCustomerInput {
+    firstname: String @doc(description: "firstname")
+    lastname: String @doc(description: "lastname")
+    email: String @doc(description: "email")
+    password: String @doc(description: "password")
+    is_subscribed: Int @doc(description: "is_subscribed")
+}
